@@ -4,20 +4,41 @@
     <md-card-title><h3>Create User</h3></md-card-title>
   </md-card-header>
   <md-card-content>
-    <form class="user_edit_form">
+    <form class="user_create_form" (ngSubmit)="f.form.valid && createUser();" #f="ngForm" novalidate>
       <md-input-container class="full-width">
-        <input mdInput type="email" placeholder="Email Address"  name="email"/>
+        <input mdInput type="email"
+               placeholder="Email Address"
+               name="email"
+               [(ngModel)]="model.email"
+               #email="ngModel"
+               required
+               email/>
+
+        <md-error *ngIf="f.submitted && !email.valid">
+          {{serverResponse.email}}
+        </md-error>
+
       </md-input-container>
+
       <table class="full-width" cellspacing="0">
         <tr>
           <td>
             <md-input-container class="full-width">
-              <input mdInput placeholder="First name" v>
+              <input mdInput placeholder="First name" [(ngModel)]="model.fname" name="fname" #fname="ngModel" required>
+
+              <md-error *ngIf="f.submitted && !fname.valid">
+                {{serverResponse.first_name}}
+              </md-error>
             </md-input-container>
+
           </td>
           <td>
             <md-input-container class="full-width">
-              <input mdInput placeholder="Last Name" >
+              <input mdInput placeholder="Last Name" [(ngModel)]="model.lname" name="lname" #lname="ngModel" required>
+
+              <md-error *ngIf="f.submitted && !lname.valid">
+                {{serverResponse.last_name}}
+              </md-error>
             </md-input-container>
           </td>
         </tr>
@@ -27,4 +48,8 @@
 
   </md-card-content>
 </md-card>
+
+
+
+
 
