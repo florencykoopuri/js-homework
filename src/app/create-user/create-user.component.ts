@@ -11,6 +11,7 @@ export class CreateUserComponent implements OnInit {
 
   model: any = {};
   public serverResponse: any;
+  success: boolean = false;
 
   constructor(private userService : UserService) { }
 
@@ -19,7 +20,8 @@ export class CreateUserComponent implements OnInit {
   }
 
   createUser() {
-
+    this.userService.createUser(this.model);
+    this.success = true;
   }
 
 }

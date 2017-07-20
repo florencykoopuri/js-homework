@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-import { User } from './user';
+import {User} from './user';
 
 @Injectable()
 export class UserService {
@@ -14,11 +14,12 @@ export class UserService {
     3: '{ "id": 3, "buyer_id": 3, "first_name": "Wilma", "last_name": "Flintstone", "email": "wilma.flinstone@dailygranite.com" }'
   };
 
-  constructor() { }
+  constructor() {
+  }
 
 
   getUsers() {
-   this.users = JSON.parse("["+Object.keys(this.userDictionary).map(key => this.userDictionary[key]).join(',')+"]");
+    this.users = JSON.parse('[' + Object.keys(this.userDictionary).map(key => this.userDictionary[key]).join(',') + ']');
   }
 
   getUser(id: number) {
@@ -26,11 +27,25 @@ export class UserService {
   }
 
   private logError(error: any) {
-    console.error('service found an error: '+error);
+    console.error('service found an error: ' + error);
   }
 
-  getServerResponse(){
+  getServerResponse() {
     return JSON.parse(this.serverResponse);
+  }
+
+  createUser(newUser) {
+    let totalUsers = Object.keys(this.userDictionary).length;
+
+    let user = {
+      id: totalUsers + 1,
+      buyer_id: totalUsers + 1,
+      first_name: newUser.fame,
+      last_name: newUser.lame,
+      email: newUser.email
+    };
+
+    this.userDictionary[totalUsers + 1] = JSON.stringify(user);
   }
 
 }
